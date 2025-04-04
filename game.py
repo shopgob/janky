@@ -35,13 +35,19 @@ def shoot(player: Player):
 
 # Perform tasks needed every game tick.
 def gametick():
+    check_collisions()
     for bullet in bullets:
         bullet.rect.y = bullet.rect.y-1
         if(bullet.rect.y < 0):
             bullet.kill()
-    check_collisions()
-    for enemy in enemies:
-        enemy.automove(screen_width)
+
+        for enemy in enemies:
+            dist = pygame.math.Vector2(bullet.rect.x, bullet.rect.y).distance_to((enemy.rect.x, enemy.rect.y))
+            print(dist)
+            if dist < 45:
+                enemy.automove(screen_width)
+    #for enemy in enemies:
+        #enemy.automove(screen_width)
 
 
 # Spawn the player
