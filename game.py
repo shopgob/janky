@@ -40,6 +40,8 @@ def gametick():
         if(bullet.rect.y < 0):
             bullet.kill()
     check_collisions()
+    for enemy in enemies:
+        enemy.automove(screen_width)
 
 
 # Spawn the player

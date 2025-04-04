@@ -1,4 +1,5 @@
 import pygame
+import random
 
 # For creating the player
 class Player(pygame.sprite.Sprite):
@@ -62,7 +63,6 @@ class Enemy(pygame.sprite.Sprite):
     def hit(self, damage: int):
         self.hitpoints = self.hitpoints-damage
 
-    def automove(self):
-        self.rect.x = 5
-        self.rect.y = 5
+    def automove(self, screen_width):
+        self.rect.x = random.randint(0, screen_width)
 
