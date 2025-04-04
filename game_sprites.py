@@ -58,11 +58,18 @@ class Enemy(pygame.sprite.Sprite):
        self.rect = self.image.get_rect()
 
        self.hitpoints = hitpoints
+       self.cool_down_count = 0
 
     # Every time an enemy gets hit, deduct hitpoints.
     def hit(self, damage: int):
         self.hitpoints = self.hitpoints-damage
 
     def automove(self, screen_width):
-        self.rect.x = random.randint(0, screen_width)
+        if self.cool_down_count <= 0:
+            self.rect.x = random.randint(0, screen_width)
+            self.cool_down_count = 60
+
+    def cooldown(self):
+        self.cool_down_count = self.cool_down_count -1
+        print(self.cool_down_count)
 

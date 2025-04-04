@@ -12,9 +12,10 @@ screen_width = 800
 screen_height = 600
 player_width = 50
 player_height = 50
-movement_size = 1
+movement_size = 2
 bullet_damage = 25
 frame_rate = 60
+cool_down_count = 0
 
 # Set the screen display mode and size
 screen = pygame.display.set_mode(size = (screen_width,screen_height))
@@ -38,15 +39,17 @@ def shoot(player: Player):
     projectile.rect.y = player.rect.y
     bullets.add(projectile)
 
+
 # Perform tasks needed every game tick.
 def gametick():
     check_collisions()
     for bullet in bullets:
-        bullet.rect.y = bullet.rect.y-1
+        bullet.rect.y = bullet.rect.y-movement_size
         if(bullet.rect.y < 0):
             bullet.kill()
 
         for enemy in enemies:
+            enemy.cooldown()
             dist = pygame.math.Vector2(bullet.rect.x, bullet.rect.y).distance_to((enemy.rect.x, enemy.rect.y))
             print(dist)
             if dist < 45:
@@ -86,6 +89,7 @@ def check_collisions():
         if collided_enemy != None:
             collided_enemy.hit(bullet_damage)
             bullet.kill()
+            print("hit enemy")
             if collided_enemy.hitpoints <= 0:
                 collided_enemy.kill()
 
