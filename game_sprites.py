@@ -62,5 +62,3 @@ class Enemy(pygame.sprite.Sprite):
     def hit(self, damage: int):
         self.hitpoints = self.hitpoints-damage
 
-    def automove():
-        
