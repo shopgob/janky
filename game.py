@@ -14,9 +14,14 @@ player_width = 50
 player_height = 50
 movement_size = 1
 bullet_damage = 25
+frame_rate = 60
 
 # Set the screen display mode and size
 screen = pygame.display.set_mode(size = (screen_width,screen_height))
+
+# Create a clock
+
+clock = pygame.time.Clock()
 
 # player = pygame.Rect(300, 400, 50, 50)
 #hero = Player(color = (255,255,0), width = player_width, height = player_height)
@@ -98,7 +103,8 @@ def main():
     hero = None
     run = True
     while run:
-
+        # Run game at the desired FPS
+        clock.tick(frame_rate)
         # re-write the screen background every loop as a solid color.
         screen.fill(color = (0,0,0))
         print_instructions("s to start, e to spawn enemy, space to shoot", 10, 570)
